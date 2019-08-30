@@ -1,4 +1,4 @@
-import DemoComponent from './lifecycle'
+import DemoComponent from './communicate/subscription'
 
 import ReactDOM from 'react-dom' 
 
