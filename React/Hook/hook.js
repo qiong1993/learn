@@ -2,6 +2,13 @@
  * 只在最顶层使用 Hook（不要在循环，条件或嵌套函数中调用 Hook）
  * 只在 React 函数中调用 Hook
  * React 靠的是 Hook 调用的顺序 知道哪个 state 对应哪个 useState
+ * 缺陷:
+ * 额外的学习成本（Functional Component 与 Class Component 之间的困惑）
+ * 写法上有限制（不能出现在条件、循环中），并且写法限制增加了重构成本
+ * 破坏了PureComponent、React.memo浅比较的性能优化效果（为了取最新的props和state，每次render()都要重新创建事件处函数）
+ * 在闭包场景可能会引用到旧的state、props值
+ * 内部实现上不直观（依赖一份可变的全局状态，不再那么“纯”）
+ * React.memo并不能完全替代shouldComponentUpdate（因为拿不到 state change，只针对 props change）
  */
 import {useState,useEffect} from 'react'
 
