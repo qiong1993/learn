@@ -87,4 +87,10 @@ console.log(true == 2) //false
 
 console.log(undefined == null) //true
 
+// [] 会被强制类型转换为 ""，而 {} 会被强制类型转换为 "[object Object]"。
+[] + {}; // "[object Object]" 
+{} + []; // 0  {}作为代码块被执行 +[] = 0
+
+
+
 
