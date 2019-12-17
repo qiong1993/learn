@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript">
+    function test(target){
+        console.log('test this',this)
+        target.innerHTML='5';
+        var timer=setInterval(function(){
+            if (target.innerHTML==1) {clearInterval(timer); }
+            target.innerHTML--;
+        },1000)
+    }
+   
+</script>
+</head>
+<body>
+<input type="button" value="直接在HTML中添加事件处理会动态创建一个事件处理函数" onclick="alert(this.value)">
+<!-- 创建一个动态函数，在这个函数中调用了test()，也就是说test()函数是当做普通函数调用的，里面的this是指向window的并不是目标元素 -->
+<div onclick="test(event.target)">点击测试</div>
+
+<div id='myBtn'>DOM0 级事件处理程序</div>
+<div id='myBtn1'>DOM1 级事件处理程序</div>
+
+</body>
+<script type="text/javascript">
+    //DOM0 级事件处理程序
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function(){
+        alert(this.innerHTML); 
+    };
+    //DOM1 级事件处理程序
+    var btn1 = document.getElementById("myBtn1");
+    btn1.addEventListener("click", function(){
+        alert(this.innerHTML);//"myBtn"
+    }, false);
+</script>
+</html>
