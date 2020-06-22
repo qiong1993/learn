@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="app">
+            {{message}} <input type="text" v-model="name"/>
+            <br/>
+            computed: {{sayMessage}}
+            <br/>
+            count: {{count}}
+            <br>
+            <button @click="say">say</button>
+            <button @click="saySelf('hello')">say hello</button>
+            <button @click="saySelf('hello',$event)">say hello and change to red</button>
+            <br>
+            <input type="text" v-model="name1"/>{{name1}}
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            //template:`<div>template {{message}}<div>`,
+            data(){
+                return {
+                    message:'hi',
+                    name:'',
+                    count:0,
+                    name1:'back name'
+                }   
+            },
+            computed:{
+                sayMessage(){
+                    this.count++
+                    return this.message + ' ' + this.name
+                }
+            },
+            methods:{
+                say(msg=""){
+                    alert(this.sayMessage)
+                },
+                saySelf(msg="hi",event){
+                    alert(msg + this.name)
+                    if(event){
+                        event.target.style.color = 'red'
+                    }
+                }
+            }
+        })
+    </script>
+</html>

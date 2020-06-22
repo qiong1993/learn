@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="app">
+            <ul>
+                <ac v-for="(item,index) of list" :key="index" :text="item">
+                    <template slot="info">
+                        <b>{{item}}-{{text}}</b>
+                    </template>  
+                </ac>
+            </ul>
+            <button @click="change">change</button>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var AC = {
+            props:{
+                text:String
+            },
+            data(){
+                return {
+
+                }
+            },
+            render(h){
+                return h('p',{},[
+                    h('span',{style:"color:red"},this.text),
+                    this.$slots.info,
+                ])
+            }
+        }
+
+        var vm = new Vue({
+            el:'#app',
+            //template:`<div>template {{message}}<div>`,
+            data(){
+                return {
+                    list:['A','B','C'],
+                }   
+            },
+            components:{ac:AC},
+            computed:{
+                
+            },
+            methods:{
+                change(){
+                    const time = Date.now()
+                    this.list = this.list.map(item=>time+item)
+                }
+            }
+        })
+    </script>
+</html>

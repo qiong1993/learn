@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="app" >
+            <render-line :level="1" :message="message"></render-line>
+            <render-line :level="2" :message="message"></render-line>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/x-template" id="hello-world-template">
+        <div>
+            <render-line :level="1" :message="message"></render-line>
+            <render-line :level="2" :message="message"></render-line>
+        </div>
+        
+    </script>
+    <script>
+        Vue.component('render-line',{
+            render:function(createElement){
+                var vnode =  createElement(
+                    'h'+this.level,
+                    {
+                        style:"color:red"
+                    },
+                    this.message
+                )
+                console.log(vnode)
+                return vnode
+            },
+            props:{
+                level:Number,
+                message:String
+            }
+        })
+
+        var App = {
+            
+            data(){
+                return {
+                    message:'message from parent',
+                }
+            },
+            template:'#hello-world-template'
+        }
+        
+        
+        var main = new Vue({
+           render:(h)=>h(App)
+        }).$mount('#app')
+    </script>
+
+</html>
